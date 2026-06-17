@@ -1,0 +1,7 @@
+Telegram Trigger
+       ↓
+Consultar Clima (HTTP Request)
+       ↓
+Formatar Resposta (Set)
+       ↓
+Enviar Resposta (Telegram)
