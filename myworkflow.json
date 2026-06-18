@@ -1,0 +1,137 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "=https://api.openweathermap.org/data/2.5/weather?q={{$json.message.text}}&appid=d51b0398624470ad3bbe2139ce765bdf&units=metric&lang=pt_br",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -16,
+        -64
+      ],
+      "id": "3b51b114-81f6-41c5-adc2-25f8d1fdf1eb",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "395cf1cf-322d-4bef-9425-eaeccaeb984f",
+              "name": "mensagem",
+              "value": "=🌡️ Temperatura: {{ $json.main.temp }}°C\n🤔 Sensação térmica: {{ $json.main.feels_like }}°C\n☁️ Clima: {{ $json.weather[0].description }}\n💧 Umidade: {{ $json.main.humidity }}%\n💨 Vento: {{ $json.wind.speed }} km/h",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        176,
+        -64
+      ],
+      "id": "c20d65a5-ac77-4f4a-a1e2-05e54c9c7b0c",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $(\"Telegram Trigger\").item.json.message.chat.id }}",
+        "text": "={{ $json.mensagem }}",
+        "additionalFields": {}
+      },
+      "id": "b3a3bfb4-3623-44bd-9b21-97af882682ce",
+      "name": "Send Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        400,
+        -64
+      ],
+      "webhookId": "1c14d0de-b373-4179-9e0a-160edbe8f432",
+      "credentials": {
+        "telegramApi": {
+          "id": "GA3WUYPN6hGUEIgC",
+          "name": "Telegram account 8"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -208,
+        -64
+      ],
+      "id": "aede2eb7-c354-4d88-b70e-e1d6c9cd7a95",
+      "name": "Telegram Trigger",
+      "webhookId": "eb3636eb-3994-4391-8bec-8d0194c92ae6",
+      "credentials": {
+        "telegramApi": {
+          "id": "GA3WUYPN6hGUEIgC",
+          "name": "Telegram account 8"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Send Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "6aafa721-2245-47a4-a19b-f2f5d224ae95",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b6ff9baa77dccb4146b4e4065a7d18cc66fbe490ca6a26548ea5995e72ece041"
+  },
+  "nodeGroups": [],
+  "id": "evzaOInzWcMPj3HM",
+  "tags": []
+}
