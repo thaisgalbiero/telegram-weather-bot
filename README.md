@@ -1,82 +1,55 @@
-# 🌡️ Telegram Weather Bot com N8N
+Telegram Weather Bot ☀️
 
-Bot do Telegram desenvolvido utilizando N8N que consulta a temperatura atual de qualquer cidade do Brasil.
+Bot de Telegram desenvolvido com n8n e OpenWeather API.
 
-## Tecnologias
+Funcionalidades
 
-- N8N
-- Telegram Bot API
-- OpenWeatherMap API
+* Recebe o nome de uma cidade pelo Telegram
+* Consulta a API OpenWeather
+* Retorna:
+    * Temperatura
+    * Sensação térmica
+    * Clima
+    * Umidade
+    * Velocidade do vento
 
-## Funcionalidades
+Tecnologias
 
-- Consulta temperatura atual
-- Sensação térmica
-- Umidade
-- Velocidade do vento
-- Condições climáticas
+* n8n
+* Telegram Bot API
+* OpenWeather API
 
-## Configuração
+Fluxo
 
-### 1. Criar Bot Telegram
+Telegram Trigger
+↓
+HTTP Request (OpenWeather)
+↓
+Edit Fields
+↓
+Send Telegram
 
-Fale com @BotFather e gere um token.
-
-### 2. Criar API Key
-
-https://openweathermap.org/api
-
-### 3. Configurar N8N
-
-Importe o workflow:
-
-```text
-workflow/telegram-weather-bot.json
-```
-
-### 4. Atualizar credenciais
-
-Substitua:
-
-```text
-SEU_TOKEN_TELEGRAM
-SUA_API_KEY
-```
-
-pelos valores corretos.
-
-## Exemplo
+Exemplo
 
 Usuário:
 
-```text
-Rio de Janeiro
-```
+Paris
 
 Bot:
 
-```text
-🌡️ Temperatura: 28°C
-
-🤔 Sensação térmica: 31°C
-
-☁️ Clima: Céu limpo
-
-💧 Umidade: 68%
-
+🌡️ Temperatura: 24°C
+🤔 Sensação térmica: 26°C
+☁️ Clima: céu limpo
+💧 Umidade: 55%
 💨 Vento: 12 km/h
-```
 
-## Demonstração
+Como usar
 
-### Workflow
+1. Crie um bot com o BotFather
+2. Gere uma API Key no OpenWeather
+3. Importe o arquivo workflow.json no n8n
+4. Configure as credenciais do Telegram
+5. Ative o workflow
 
-![Workflow](screenshots/workflow.png)
-
-### Exemplo Telegram
-
-![Telegram](screenshots/telegram-example.png)
-
-## Autor
-
+Autor
 Thaís Sgalbiero
