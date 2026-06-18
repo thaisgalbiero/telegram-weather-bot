@@ -23,7 +23,7 @@
     },
     {
       "parameters": {
-        "url": "=https://api.openweathermap.org/data/2.5/weather?q={{$json[\"message\"][\"text\"]}},BR&appid=SUA_API_KEY&units=metric&lang=pt_br",
+        "url": "=https://api.openweathermap.org/data/2.5/weather?q={{$json.message.text}}&appid=d51b0398624470ad3bbe2139ce765bdf&units=metric&lang=pt_br",
         "responseFormat": "json"
       },
       "name": "Consultar Clima",
